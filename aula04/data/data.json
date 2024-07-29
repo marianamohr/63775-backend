@@ -17,5 +17,12 @@
     "name": "Rony Wesley",
     "cidade": "Ottery St. Catchpole",
     "pais": "UK"
+  },
+  { "id": 5, "name": "Mari", "cidade": "Joinville", "pais": "Brasil" },
+  {
+    "id": 6,
+    "name": "Rony Wesley",
+    "cidade": "Ottery St. Catchpole",
+    "pais": "UK"
   }
 ]

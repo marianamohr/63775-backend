@@ -3,6 +3,8 @@
 ////console.log("Continuação...");
 //console.log("Tarefa Terminada!");
 
+const data = new Date()
+console.log(data)
 const temporizador = (callback) => {
   setTimeout(() => {
     callback();
