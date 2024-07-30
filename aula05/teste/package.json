@@ -1,0 +1,16 @@
+{
+  "name": "teste",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "xablau": "node ."
+  },
+  "keywords": [],
+  "author": "Mari Mohr",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
+}
