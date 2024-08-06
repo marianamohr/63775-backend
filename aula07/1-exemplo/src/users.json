@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Lucas",
+    "sobrenome": "Prado",
+    "idade": 24,
+    "curso": "Backend",
+    "id": 1
+  },
+  {
+    "name": "Mariana",
+    "sobrenome": "Mohr",
+    "idade": 34,
+    "curso": "Backend",
+    "id": 3
+  },
+  {
+    "name": "Mariana",
+    "sobrenome": "Mohr",
+    "idade": 34,
+    "curso": "Backend",
+    "id": 5
+  },
+  {
+    "name": "Mariana",
+    "sobrenome": "Mohr",
+    "idade": 34,
+    "curso": "Backend",
+    "id": 6
+  },
+  {
+    "name": "Mariana",
+    "sobrenome": "Mohr",
+    "idade": 34,
+    "curso": "Backend",
+    "id": 7
+  }
+]
