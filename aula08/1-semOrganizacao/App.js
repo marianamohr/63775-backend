@@ -97,9 +97,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + "/public"));
 
-app.get(
-  "/usuarios",
-  (req, res, next) => {
+app.get("/usuarios", (req, res, next) => {
     console.log(`${new Date()} - Rota: ${req.route.path} - Método: ${req.route.stack[0].method}`)
   next()
   },
