@@ -49,8 +49,28 @@ const food = [
 
 router.get("/:nome/:sobrenome", (req, res) => {
   const { nome, sobrenome } = req.params;
-  const user = { nome, sobrenome};
+  const user = { nome, sobrenome };
   res.render("index", user);
+});
+
+router.get("/random", (req, res) => {
+  const index = Math.floor(Math.random() * 4);
+  const user = { nome: users[index].nome, sobrenome: users[index].sobrenome };
+  res.render("index", user);
+});
+
+router.get("/listUsers", (req, res) => {
+  res.render("list", { users });
+});
+
+router.get("/listProducts", (req, res) => {
+  const user = {name: "Mari", lastName: "Mohr", role: "Admin"}
+  const data = { user, food, isAdmin: user.role === "Admin" };
+  res.render("products", data);
+});
+
+router.get("/register", (req, res) => {
+  res.render("register");
 });
 
 module.exports = router;
