@@ -1,0 +1,15 @@
+<div>
+  <H1>Tudo certo</H1>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io(); 
+  console.log("aqui") 
+  socket.emit('xablau', 'To mandondo Aoba! do cliente!'); 
+ 
+  socket.on('hello', (data) => { console.log(data)});
+  socket.on('batatinha', (data) => { console.log(data)});
+  socket.on('sopa', (data) => { console.log(data)}); 
+
+</script>
