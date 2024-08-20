@@ -1,0 +1,46 @@
+body {
+    background-color: #e5ddd5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container-fluid {
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    overflow: hidden;
+}
+h1 {
+    background-color: #075e54;
+    color: #ffffff;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+}
+#chatBox {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+#messageLogs {
+    padding: 20px;
+    height: 400px;
+    overflow-y: scroll;
+    border-top: 1px solid #ddd;
+}
+#messageLogs p {
+    background-color: #dcf8c6;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    max-width: 80%;
+}
+#messageLogs p.ownMessage {
+    background-color: #34b7f1;
+    color: #fff;
+    margin-left: auto;
+    text-align: right;
+}

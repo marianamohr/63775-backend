@@ -1,0 +1,32 @@
+<div class="container-fluid mt-3">
+    <h1>CoderZap</h1>
+    
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const socket = io();
+    let user;
+/*
+    Swal.fire({
+        title:"Olá todo mundo",
+        text: "E aee?",
+        icon:"success"
+    })*/
+        
+  Swal.fire({
+        title: "Identificar",
+        input: "text",
+        text: "Digite seu nome!",
+        inputValidator: (value) => {
+            return !value && "Você precisa escrever seu nome!";
+        },
+        allowOutsideClick: false,
+    }).then((result) => {
+        user = result.value;
+        console.log(user)
+    });
+
+</script>

@@ -1,0 +1,73 @@
+<div class="phone-frame">
+        <div class="container-fluid">
+            <h1>CoderZap</h1>
+            <div>
+                <input id="chatBox" placeholder="Mensagem Aqui">
+            </div>
+            <div>
+                <div id="messageLogs"></div>
+            </div>
+        </div>
+    </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const socket = io();
+    let user
+    let chatBox = document.getElementById('chatBox');
+    Swal.fire({
+        title: "Identificar",
+        input: "text",
+        text: "Digite seu nome!",
+        inputValidator: (value) => {
+            return !value && "Você precisa escrever seu nome!";
+        },
+        allowOutsideClick: false,
+    }).then((result) => {
+        user = result.value;
+        socket.emit('userName', user);
+    });
+
+     socket.on("userConnected", (user) => {
+        console.log("userConnected", user);
+        Swal.fire({
+            icon: "info",
+            title: "Novo Usuário",
+            text: `${user} entrou na sala!`
+        });
+    });
+
+    chatBox.addEventListener('keyup', (e) => {
+        console.log("keyup", e.key);
+        if (e.key === 'Enter') {
+    
+            const message = chatBox.value.trim();
+            if (message.length > 0) {
+             
+
+           //     console.log("enviando mensagem", message);
+                socket.emit('message', { user: user, message: message});
+                chatBox.value = '';
+            }
+        }
+    });
+    /*
+    //socket.on(user, (data) =>{
+     //   console.log(data)
+   // })*/
+
+
+    socket.on('messageLogs', (data) => {
+        console.log("recebendo mensagem", data);
+        let logs = document.getElementById('messageLogs');
+        let messages = ""
+        data.forEach((message) => {
+            messages = messages + `${message.user} diz: ${message.message} <br>`;
+        }); 
+       logs.innerHTML = messages;
+    });
+
+
+</script>
