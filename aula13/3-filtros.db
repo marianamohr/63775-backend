@@ -1,0 +1,46 @@
+
+/* global use, db */
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+const database = 'clientesDB';
+const collection = 'clientes';
+
+// Use the specified database.
+use(database);
+
+// Create the collection and insert the documents.
+db.createCollection(collection);
+/*
+db.clientes.insertMany([
+    { "nome" : "Paulo", "idade" : 25 },
+    { "nome" : "João", "idade" : 22 },
+    { "nome" : "Lúcia", "idade" : 25 },
+    { "nome" : "João", "idade" : 29 },
+    { "nome" : "Fede", "idade" : 35 }
+]);
+print('Liste todos os documentos na coleção de clientes classificados por idade decrescente:');
+db.clientes.find().sort({idade:-1})
+
+print("Liste o cliente mais jovem")
+db.clientes.find().sort({ idade: 1 }).limit(1);
+
+print("Liste o segundo cliente mais jovem")
+db.clientes.find().sort({ idade: 1 }).skip(1).limit(1);
+
+print("Listar clientes chamados 'João")
+db.clientes.find({ nome: "João" });
+
+print("Liste os clientes chamados 'João' que têm 29 anos:")
+db.clientes.find({ nome: "João", idade: 29 });
+
+
+print("Liste os clientes chamados 'João' ou 'Lúcia'")
+db.clientes.find({ nome: { $in: ["João", "Lúcia",] } });
+
+*/
+
+
+print("Liste os clientes com mais de 25 anos.")
+db.clientes.find({ idade: { $gte: 25 } });
+
