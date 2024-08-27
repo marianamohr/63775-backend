@@ -41,6 +41,14 @@ db.clientes.find({ nome: { $in: ["João", "Lúcia",] } });
 */
 
 
-print("Liste os clientes com mais de 25 anos.")
-db.clientes.find({ idade: { $gte: 25 } });
+//print("Liste os clientes com mais de 25 anos.")
+//db.clientes.find({ idade: { $gte: 25 } });
 
+//Liste clientes com 25 anos ou menos.
+
+//Liste os clientes que NÃO têm 25 anos.
+
+//Listar clientes com idade entre 26 e 35 anos.
+
+//Atualize a idade de Fede para 36 anos, listando e 
+//verificando se ele não aparece na última lista.
