@@ -67,4 +67,20 @@ router.put("/:uid", validationUser, async (req, res) => {
   }
 });
 
+
+router.put("/redefinirSenha", async (req, res) => {
+  try {
+    console.log("to no Patch");
+    const { username, password } = req.body;
+   
+    const newUser = await userService.redefinirSenha(username, password);
+    if(!newUser){
+      return res.status(404).json({message: "Not found"});
+    }
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

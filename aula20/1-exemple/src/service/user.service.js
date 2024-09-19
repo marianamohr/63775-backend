@@ -52,10 +52,26 @@ const loginUser = async (user) => {
   const isValid = await isValidatePassword(user.password, userFound);
 
   if (isValid) {
-    return userFound
+    return userFound;
   }
   return false;
-}
+};
+
+const redefinirSenha = async (username, password) => {
+  const userFound = await userModel.findOne({ email: username });
+  if (!userFound) return false;
+  const newPass = await createHash(password);
+  const newUser = {
+    ...userFound,
+    password: newPass,
+  };
+
+  const userCreated = await userModel.updateOne(
+    { email: username },
+    newUser
+  );
+  return userCreated;
+};
 
 module.exports = {
   getUsers,
@@ -65,4 +81,5 @@ module.exports = {
   updateUser,
   getUsersByEmail,
   loginUser,
+  redefinirSenha,
 };

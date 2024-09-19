@@ -7,6 +7,10 @@ router.get("/", (req, res) => {
   res.render("login");
 });
 
+router.get("/redefinir", (req, res) => {
+  res.render("redefinir");
+});
+
 router.get("/home", (req, res) => {
   if (!req.session.logged) {
     return res.redirect("/")
