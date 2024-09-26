@@ -22,7 +22,7 @@ const main = async (de, para) => {
       "EUR": "euros",
       "BTC": "bitcoins",
     }
-    const resposta = await fetch(de, para);
+    const resposta = fetch(de, para);
     const key = `${de}${para}`
     //console.log(resposta)
     //const dolar = Number(resposta.USDBRL.high);

@@ -45,10 +45,20 @@ db.clientes.find({ nome: { $in: ["João", "Lúcia",] } });
 //db.clientes.find({ idade: { $gte: 25 } });
 
 //Liste clientes com 25 anos ou menos.
+//db.clientes.find({ idade: { $lte: 25 } })
+
 
 //Liste os clientes que NÃO têm 25 anos.
+//db.clientes.find({ idade: { $ne: 25 } })
 
 //Listar clientes com idade entre 26 e 35 anos.
+//db.clientes.find({ idade: { $gte: 26, $lte: 35 } })
 
-//Atualize a idade de Fede para 36 anos, listando e 
-//verificando se ele não aparece na última lista.
+//Atualize a idade de Fede para 36 anos, 
+//db.clientes.updateOne(
+ //   {nome:"Fede"},
+ //   {$set: {idade:36}}
+//)
+
+//listando e verificando se ele não aparece na última lista.
+db.clientes.find({ idade: { $gte: 26, $lte: 35 } })

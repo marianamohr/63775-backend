@@ -1,4 +1,6 @@
 <h1>Registration Form</h1>
+{{if isAdmin}}
+  <p>Welcome, admin!</p>
 <form action="/cookie/set" method="post">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
@@ -9,6 +11,9 @@
   <button type="submit">Register</button>
 </form>
 <button id="getCookie">GetCookie</button>
+{{else}}
+<p>Vc nao é admin!</p>
+{{/if}}
 <script>
   console.log('register page');
   document.getElementById('getCookie').addEventListener('click', function() {
