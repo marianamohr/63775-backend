@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const pathView = path.join(`${__dirname}/views`);
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const FileStore = require("session-file-store")(session);
+
 const passport = require("passport");
 const initializePassport = require("./config/passport.config");
 

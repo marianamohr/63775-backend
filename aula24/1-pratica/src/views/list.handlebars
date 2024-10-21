@@ -10,7 +10,7 @@
   <ul>
     {{#each users}}
     <div>
-      <li>{{first_name}} {{last_name}} {{email}}</li>
+      <li>{{first_name}} {{last_name}} {{email}} | {{role}}</li>
       <button class="delete-button" data-email="{{email}}">Deletar</button>
       <button class="edit-button" data-email="{{email}}" data-id="{{_id}}">Editar</button>
 
@@ -20,7 +20,7 @@
   {{else}}
   {{#each users}}
   <div>
-    <li>{{first_name}} {{last_name}} {{email}}</li>
+    <li>{{first_name}} {{last_name}} {{email}} | {{role}}</li>
 
   </div>
   {{/each}}

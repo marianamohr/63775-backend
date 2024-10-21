@@ -4,7 +4,7 @@
   <a href="/list">User list</a>
     <a href="/user/logout">Logout</a>
 </nav>
-
+  {{#if isAdmin}}
 <h1>Edit Form</h1>
 
 <form id="form">
@@ -21,6 +21,13 @@
   <br>
   <button class="edit-button" data-email="{{user.email}}" data-id="{{user._id}}">Update</button>
 </form>
+  {{else}}
+   <div></div>
+    <h3>{{userLogged.first_name}}, sua permissão não é admin.</h3>
+
+  </div>
+
+   {{/if}}
 
 <script>
   console.log('edit page');
