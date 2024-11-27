@@ -1,73 +1,3 @@
-
-/*const winston = require("winston");
-
-const config = require("../config/config");
-
-const env = config.env;
-console.log(env);
-const customLevelOptions = {
-  levels: {
-    fatal: 0,
-    error: 1,
-    info: 2,
-    debug: 3,
-  },
-  colors: {
-    fatal: "red",
-    error: "orange",
-    info: "blue",
-    debug: "white",
-  },
-};
-
-const devLogger = winston.createLogger({
-  level: customLevelOptions.levels,
-  transports: [
-    new winston.transports.Console({
-      level: "info",
-      format: winston.format.combine(
-        winston.format.colorize({ colors: customLevelOptions.colors }),
-        winston.format.simple()
-      ),
-    }),
-  ],
-});
-
-const prodLogger = winston.createLogger({
-  transports: [
-    new winston.transports.Console({
-      level: "http",
-    }),
-    new winston.transports.File({
-      filename: "error.log",
-      level: "warn",
-      format: winston.format.combine(
-        winston.format.colorize({ colors: customLevelOptions.colors }),
-        winston.format.simple()
-      ),
-    }),
-  ],
-});
-let logger;
-if (env != "production") {
-  logger = devLogger;
-} else {
-  logger = prodLogger;
-}
-const log = (req, res, next) => {
-  req.logger = logger;
-  req.logger.error(`${req.method} na ${req.url} - ${new Date()}`); // maior priorodade
-  req.logger.info(`${req.method} na ${req.url} - ${new Date()}`);
-  // req.logger.http(`${req.method} na ${req.url} - ${new Date()}`);
-  req.logger.debug(`${req.method} na ${req.url} - ${new Date()}`); // menor prioridade
-  // req.logger.error(`${req.method} na ${req.url} - ${new Date()}`);
-
-  next();
-};
-
-module.exports = log;
-*/
-
 const winston = require("winston");
 
 const config = require("../config/config");
@@ -78,40 +8,72 @@ const customLevelOptions = {
   levels: {
     fatal: 0,
     error: 1,
-    info: 2,
-    debug: 3,
+    warning: 2,
+    info: 3,
+    debug: 4,
   },
   colors: {
     fatal: "red",
     error: "orange",
+    warning: "yellow",
     info: "blue",
     debug: "white",
   },
 };
-const logger = winston.createLogger({
+const loggerDev = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level}]: ${message}`;
+    })
+  ),
   transports: [
     new winston.transports.Console({
-      level: "info",
+      level: "debug",
+      // format: winston.format.combine(
+      //  winston.format.colorize({ colors: customLevelOptions.colors }),
+      //   winston.format.simple()
+      // ),
+    }),
+  ],
+});
+
+const loggerProd = winston.createLogger({
+  levels: customLevelOptions.levels,  // define os níveis personalizados
+  level: "info",  // define o nível inicial
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level}]: ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize({ colors: customLevelOptions.colors }),
         winston.format.simple()
       ),
     }),
     new winston.transports.File({
-      filename: "./error.log",
-      level: "fatal",
+      filename: "./errors.log",
+      level: "warn",
       format: winston.format.simple(),
     }),
   ],
 });
 
-
+winston.addColors(customLevelOptions.colors); 
 
 const log = (req, res, next) => {
-  req.logger = logger;
-  req.logger.http(`${req.method} na ${req.url} - ${new Date()}`);
-  req.logger.info(`${req.method} na ${req.url} - ${new Date()}`);
-  req.logger.debug(`${req.method} na ${req.url} - ${new Date()}`);
+  if (ENV === "prod") {
+    req.logger = loggerProd;
+  } else {
+    req.logger = loggerDev;
+  }
+
+  //req.logger.http(`${req.method} na ${req.url} - ${new Date()} - ENV ${ENV}`);
+   req.logger.info(`${req.method} na ${req.url} - ${new Date()}`);
+  // req.logger.debug(`${req.method} na ${req.url} - ${new Date()}`);
 
   next();
 };
