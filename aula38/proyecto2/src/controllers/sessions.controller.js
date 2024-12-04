@@ -27,7 +27,9 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).send({ status: "error", error: "Incomplete values" });
     const user = await userService.getUserByEmail(email);
-    if (!user) return res.status(400).send({ status: "error", error: "User doesn't exist" });
+    if (!user) {
+        console.log(`tentativa de login com email ${email} nao existe`)
+        return res.status(400).send({ status: "error", error: "Incorrect credentials" });}
     const passwordValidation = await validatePassword(user, password);
     if (!passwordValidation) return res.status(400).send({ status: "error", error: "Incorrect credentials" });
     res.send({ status: "success", message: "Logged in!" })
