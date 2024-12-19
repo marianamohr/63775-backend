@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 
+// configuração do logger
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
@@ -21,6 +22,7 @@ async function bootstrap() {
       ],
     }),
   });
+
   // Configuração do Swagger
   const config = new DocumentBuilder()
     .setTitle('API Example')

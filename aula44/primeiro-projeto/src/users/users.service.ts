@@ -24,7 +24,7 @@ export class UsersService {
     } catch (error) {
       if (error.code === 11000) {
         this.logger.fatal(
-          `tentativa de cadastrar novo user com email ${createUserDto.email}`,
+          `tentativa de cadastrar novo user com email ${createUserDto.email} já existente`,
         );
         throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
       }

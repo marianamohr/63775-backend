@@ -85,11 +85,12 @@ describe('ProductsService', () => {
     it('should update a product', async () => {
       const updateProductDto: UpdateProductDto = { name: 'Updated Product' };
       const result = await service.update('1', updateProductDto);
-      expect(result).toEqual({ modifiedCount: 1 });
+      expect(result).toEqual(mockProduct);
       expect(model.updateOne).toHaveBeenCalledWith(
         { _id: '1' },
         updateProductDto,
       );
+      expect(model.findOne).toHaveBeenCalledWith({ _id: '1' });
     });
   });
 

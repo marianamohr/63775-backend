@@ -31,13 +31,14 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
-    const product = await this.productModel.updateOne(
+    await this.productModel.updateOne(
       {
         _id: id,
       },
       updateProductDto,
     );
-    return product;
+    const newProduct = await this.productModel.findOne({ _id: id });
+    return newProduct;
   }
 
   async remove(id: string) {

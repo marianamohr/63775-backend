@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from '@nestjs/config';
 import { Model } from 'mongoose';
 import { getModelToken } from '@nestjs/mongoose';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 const mockUser = {
   _id: '1',
@@ -71,7 +72,18 @@ describe('UsersService', () => {
         email: 'test@example.com',
         cpf: '',
       };
-      const result = await service.create(createUserDto);
+      const duplicateEmailError = {
+        code: 11000,
+        message:
+          'E11000 duplicate key error collection: users index: email_1 dup key: { email: "test@example.com" }',
+      };
+
+      jest.spyOn(model, 'create').mockRejectedValue(duplicateEmailError);
+
+      expect(service.create(createUserDto)).rejects.toThrow(
+        new HttpException(duplicateEmailError.message, HttpStatus.BAD_REQUEST),
+      );
+      expect(model.create).toHaveBeenCalledWith(createUserDto);
     });
   });
 
